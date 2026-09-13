@@ -140,19 +140,34 @@ export default function NotesPage() {
                 <div
                   key={note.id}
                   onClick={() => setSelectedNoteId(note.id)}
-                  className={`p-2.5 rounded-lg cursor-pointer transition-colors space-y-1 ${
+                  className={`group p-2.5 rounded-lg cursor-pointer transition-colors space-y-1 ${
                     isSelected
-                      ? 'bg-notion-card text-notion-text font-semibold border-l-3 border-terracotta shadow-warm-sm'
+                      ? 'bg-notion-card text-notion-text font-semibold border-l-3 border-indigo-600 shadow-warm-sm'
                       : 'text-notion-muted hover:text-notion-text hover:bg-notion-hover'
                   }`}
                 >
-                  <div className="flex items-center gap-2 truncate text-xs">
-                    {getNoteIcon(note.icon)}
-                    <span className="truncate font-semibold text-notion-text font-display">{note.title || 'Untitled'}</span>
+                  <div className="flex items-center justify-between gap-1.5">
+                    <div className="flex items-center gap-2 truncate text-xs">
+                      {getNoteIcon(note.icon)}
+                      <span className="truncate font-semibold text-notion-text font-display">{note.title || 'Untitled'}</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleDeleteNote(note.id);
+                      }}
+                      className="opacity-0 group-hover:opacity-100 p-1 rounded text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-opacity cursor-pointer shrink-0"
+                      title="Delete document"
+                      aria-label={`Delete ${note.title || 'note'}`}
+                    >
+                      <Trash2 size={12} />
+                    </button>
                   </div>
 
                   {linkedJob && (
-                    <div className="text-[10px] text-terracotta font-medium flex items-center gap-1">
+                    <div className="text-[10px] text-indigo-600 dark:text-indigo-400 font-medium flex items-center gap-1">
                       <Briefcase size={10} />
                       <span className="truncate">Linked: {linkedJob.company}</span>
                     </div>
@@ -207,9 +222,11 @@ export default function NotesPage() {
                 </div>
 
                 <button
+                  type="button"
                   onClick={() => handleDeleteNote(activeNote.id)}
-                  className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40"
+                  className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 cursor-pointer transition-colors"
                   title="Delete document"
+                  aria-label="Delete document"
                 >
                   <Trash2 size={15} />
                 </button>

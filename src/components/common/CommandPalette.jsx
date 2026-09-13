@@ -15,7 +15,8 @@ import {
   Download,
   ArrowRight,
   Code2,
-  Terminal
+  Terminal,
+  Users2
 } from 'lucide-react';
 
 export default function CommandPalette() {
@@ -24,6 +25,7 @@ export default function CommandPalette() {
     setCommandPaletteOpen,
     tasks,
     codingChallenges,
+    clubWork,
     jobs,
     notes,
     theme,
@@ -50,6 +52,7 @@ export default function CommandPalette() {
     { id: 'p-dash', title: 'Dashboard Overview', category: 'Navigation', icon: LayoutDashboard, path: '/dashboard' },
     { id: 'p-tasks', title: 'Tasks & Nested To-Dos', category: 'Navigation', icon: CheckSquare, path: '/tasks' },
     { id: 'p-coding', title: 'Coding Prep & DSA Tracker', category: 'Navigation', icon: Code2, path: '/coding' },
+    { id: 'p-club', title: 'Club Work & Campus Leadership', category: 'Navigation', icon: Users2, path: '/club-work' },
     { id: 'p-jobs', title: 'Job Application Tracker', category: 'Navigation', icon: Briefcase, path: '/jobs' },
     { id: 'p-cal', title: 'Unified Calendar', category: 'Navigation', icon: Calendar, path: '/calendar' },
     { id: 'p-notes', title: 'Workspace Notes', category: 'Navigation', icon: FileText, path: '/notes' },
@@ -145,9 +148,20 @@ export default function CommandPalette() {
       }))
     : [];
 
+  const filteredClub = q.length > 1
+    ? (clubWork || []).filter(c => c.title.toLowerCase().includes(q) || c.clubName.toLowerCase().includes(q)).slice(0, 3).map(c => ({
+        id: `club-${c.id}`,
+        title: `${c.title} — ${c.clubName} (${c.status})`,
+        category: 'Club Work',
+        icon: Users2,
+        action: () => navigate('/club-work')
+      }))
+    : [];
+
   const allResults = [
     ...filteredPages.map(p => ({ ...p, action: () => navigate(p.path) })),
     ...filteredCoding,
+    ...filteredClub,
     ...filteredJobs,
     ...filteredTasks,
     ...filteredNotes,

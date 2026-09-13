@@ -398,6 +398,106 @@ export function AppProvider({ children }) {
     });
   }, []);
 
+  // CLUB WORK ACTIONS
+  const addClubItem = useCallback((itemInput) => {
+    const newItem = {
+      id: 'club-' + Date.now(),
+      title: itemInput.title || 'Untitled Club Task',
+      clubName: itemInput.clubName || 'General Club',
+      category: itemInput.category || 'Event Planning',
+      role: itemInput.role || 'Member / Contributor',
+      priority: itemInput.priority || 'Medium',
+      status: itemInput.status || 'Todo',
+      dueDate: itemInput.dueDate || new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0],
+      assignee: itemInput.assignee || 'Self',
+      budget: itemInput.budget || '$0',
+      location: itemInput.location || 'Campus / Remote',
+      notes: itemInput.notes || '',
+      deliverables: Array.isArray(itemInput.deliverables) ? itemInput.deliverables : []
+    };
+
+    setData(prev => ({
+      ...prev,
+      clubWork: [newItem, ...(prev.clubWork || [])]
+    }));
+
+    logActivity({
+      type: 'club_created',
+      title: `Added club initiative "${newItem.title}"`,
+      details: `${newItem.clubName} • ${newItem.category}`,
+      link: '/club-work'
+    });
+
+    addToast(`Added club initiative "${newItem.title}"`, 'success');
+    return newItem;
+  }, [logActivity, addToast]);
+
+  const updateClubItem = useCallback((id, updates) => {
+    setData(prev => ({
+      ...prev,
+      clubWork: (prev.clubWork || []).map(item => item.id === id ? { ...item, ...updates } : item)
+    }));
+  }, []);
+
+  const deleteClubItem = useCallback((id) => {
+    setData(prev => ({
+      ...prev,
+      clubWork: (prev.clubWork || []).filter(item => item.id !== id)
+    }));
+    addToast('Club initiative removed', 'info');
+  }, [addToast]);
+
+  const toggleClubItemStatus = useCallback((id) => {
+    setData(prev => {
+      const item = (prev.clubWork || []).find(c => c.id === id);
+      if (!item) return prev;
+
+      let nextStatus = 'In Progress';
+      if (item.status === 'In Progress') nextStatus = 'Completed';
+      else if (item.status === 'Completed') nextStatus = 'Blocked';
+      else if (item.status === 'Blocked') nextStatus = 'Todo';
+
+      return {
+        ...prev,
+        clubWork: prev.clubWork.map(c =>
+          c.id === id ? { ...c, status: nextStatus } : c
+        )
+      };
+    });
+  }, []);
+
+  const toggleClubDeliverable = useCallback((clubId, delId) => {
+    setData(prev => ({
+      ...prev,
+      clubWork: (prev.clubWork || []).map(c => {
+        if (c.id !== clubId) return c;
+        const deliverables = (c.deliverables || []).map(d =>
+          d.id === delId ? { ...d, completed: !d.completed } : d
+        );
+        return { ...c, deliverables };
+      })
+    }));
+  }, []);
+
+  const addClubDeliverable = useCallback((clubId, title) => {
+    if (!title?.trim()) return;
+    const newDel = {
+      id: 'cd-' + Date.now(),
+      title: title.trim(),
+      completed: false
+    };
+    setData(prev => ({
+      ...prev,
+      clubWork: (prev.clubWork || []).map(c => {
+        if (c.id !== clubId) return c;
+        return {
+          ...c,
+          deliverables: [...(c.deliverables || []), newDel]
+        };
+      })
+    }));
+  }, []);
+
   // JOB ACTIONS
   const addJob = useCallback((jobInput) => {
     const newJob = {
@@ -572,6 +672,13 @@ export function AppProvider({ children }) {
     }));
   }, []);
 
+  const setUserName = useCallback((newName) => {
+    setData(prev => ({
+      ...prev,
+      settings: { ...prev.settings, userName: newName }
+    }));
+  }, []);
+
   const exportData = useCallback(() => {
     exportDatabaseJSON(data);
     addToast('Backup exported successfully', 'success');
@@ -600,6 +707,7 @@ export function AppProvider({ children }) {
     const emptyState = {
       tasks: [],
       codingChallenges: [],
+      clubWork: [],
       jobs: [],
       notes: [],
       activityLog: [],
@@ -717,6 +825,7 @@ export function AppProvider({ children }) {
   const value = {
     tasks: data.tasks,
     codingChallenges: data.codingChallenges || [],
+    clubWork: data.clubWork || [],
     jobs: data.jobs,
     notes: data.notes,
     activityLog: data.activityLog || [],
@@ -744,6 +853,13 @@ export function AppProvider({ children }) {
     updateCodingChallenge,
     deleteCodingChallenge,
     toggleCodingStatus,
+    // Club Work methods
+    addClubItem,
+    updateClubItem,
+    deleteClubItem,
+    toggleClubItemStatus,
+    toggleClubDeliverable,
+    addClubDeliverable,
     // Job methods
     addJob,
     updateJob,
@@ -757,6 +873,8 @@ export function AppProvider({ children }) {
     // NLP quick add
     executeQuickAdd,
     // Settings & Backup
+    userName: data.settings?.userName || 'Varnzz',
+    setUserName,
     setTheme,
     fontFamily,
     setFontFamily,

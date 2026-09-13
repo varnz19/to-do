@@ -117,9 +117,11 @@ export default function JobDetailPage() {
         </button>
 
         <button
+          type="button"
           onClick={handleDelete}
-          className="flex items-center gap-1.5 text-xs text-rose-600 hover:text-rose-700 px-2.5 py-1 rounded-md hover:bg-rose-50 dark:hover:bg-rose-950/40 font-medium transition-colors"
+          className="flex items-center gap-1.5 text-xs text-rose-600 hover:text-rose-700 px-2.5 py-1 rounded-md hover:bg-rose-50 dark:hover:bg-rose-950/40 font-medium transition-colors cursor-pointer"
           title="Delete application"
+          aria-label="Delete application"
         >
           <Trash2 size={14} />
           <span>Delete Application</span>

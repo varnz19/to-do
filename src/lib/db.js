@@ -186,6 +186,125 @@ export const SAMPLE_DATA = {
     }
   ],
 
+  clubWork: [
+    // --- GDGoC (Google Developer Groups on Campus) ---
+    {
+      id: 'club-gdgoc-1',
+      title: 'GDGoC Solution Challenge 2026: Campus Ideation & Hackathon Kickoff',
+      clubName: 'GDGoC',
+      category: 'Event Planning',
+      role: 'Lead Organizer / Chapter Lead',
+      priority: 'High',
+      status: 'In Progress',
+      dueDate: new Date(Date.now() + 86400000 * 5).toISOString().split('T')[0],
+      assignee: 'Alex, Sarah & Self',
+      budget: '$1,200 Google Grant',
+      location: 'Campus Innovation Hub Hall A',
+      notes: 'Finalize problem statements aligned with UN SDGs. Organize mentor matching discord office hours and submit kickoff recording to Google community dashboard.',
+      deliverables: [
+        { id: 'cd-1', title: 'Confirm keynote speakers & mentor roster', completed: true },
+        { id: 'cd-2', title: 'Finalize sponsor booth & project demo tables', completed: false },
+        { id: 'cd-3', title: 'Publish registration portal on Devpost and Discord', completed: true },
+        { id: 'cd-4', title: 'Coordinate volunteer orientation slide deck', completed: false }
+      ]
+    },
+    {
+      id: 'club-gdgoc-2',
+      title: 'Android & Gemini AI Studio Hands-On Study Jam',
+      clubName: 'GDGoC',
+      category: 'Workshops',
+      role: 'Technical Instructor',
+      priority: 'Medium',
+      status: 'In Progress',
+      dueDate: new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0],
+      assignee: 'Self',
+      budget: '$250 refreshments',
+      location: 'CS Lab 304 & Google Meet',
+      notes: 'Hands-on live coding workshop building multimodal apps with Gemini 1.5 Flash API and Kotlin Jetpack Compose.',
+      deliverables: [
+        { id: 'cd-5', title: 'Deploy workshop starter repository on GitHub', completed: true },
+        { id: 'cd-6', title: 'Generate student Gemini API trial keys in AI Studio', completed: true },
+        { id: 'cd-7', title: 'Broadcast RSVP announcement to CS student mailing lists', completed: false }
+      ]
+    },
+    {
+      id: 'club-gdgoc-3',
+      title: 'Google Cloud Career Certification Study Group',
+      clubName: 'GDGoC',
+      category: 'Workshops',
+      role: 'Cloud Lead',
+      priority: 'Low',
+      status: 'Todo',
+      dueDate: new Date(Date.now() + 86400000 * 10).toISOString().split('T')[0],
+      assignee: 'Core Tech Team',
+      budget: '$0 (Sponsored by Google Cloud)',
+      location: 'Discord Voice & Notion',
+      notes: 'Associate Cloud Engineer exam preparation track. Weekly problem walkthroughs and Qwiklabs credit distributions.',
+      deliverables: [
+        { id: 'cd-8', title: 'Distribute 100 Qwiklabs practice course vouchers', completed: false },
+        { id: 'cd-9', title: 'Schedule weekly practice exam review sessions', completed: false }
+      ]
+    },
+
+    // --- IEEE CIS (IEEE Computational Intelligence Society) ---
+    {
+      id: 'club-ieeecis-1',
+      title: 'Deep Learning & Neural Architectures Research Paper Reading Group',
+      clubName: 'IEEE CIS',
+      category: 'Workshops',
+      role: 'Research & Technical Chair',
+      priority: 'High',
+      status: 'In Progress',
+      dueDate: new Date(Date.now() + 86400000 * 4).toISOString().split('T')[0],
+      assignee: 'Research Committee & Self',
+      budget: '$100 print & journal allowance',
+      location: 'ECE Conference Room 210',
+      notes: 'Bi-weekly paper presentations on state space models (Mamba), attention mechanisms, and neuro-symbolic reasoning.',
+      deliverables: [
+        { id: 'cd-10', title: 'Select initial 3 papers on Transformer vs SSM trade-offs', completed: true },
+        { id: 'cd-11', title: 'Assign student presenters and faculty discussant', completed: true },
+        { id: 'cd-12', title: 'Upload presentation slide decks to IEEE CIS repository', completed: false }
+      ]
+    },
+    {
+      id: 'club-ieeecis-2',
+      title: 'Autonomous Robotics & Neural Control Systems Symposium',
+      clubName: 'IEEE CIS',
+      category: 'Event Planning',
+      role: 'Symposium Coordinator & Secretary',
+      priority: 'High',
+      status: 'In Progress',
+      dueDate: new Date(Date.now() + 86400000 * 8).toISOString().split('T')[0],
+      assignee: 'Executive Committee',
+      budget: '$3,500 approved (IEEE Section Grant)',
+      location: 'Dean of Engineering Auditorium',
+      notes: 'Regional student conference bringing together researchers in fuzzy systems, genetic algorithms, and reinforcement learning for robotics.',
+      deliverables: [
+        { id: 'cd-13', title: 'Send formal invitation letter to guest keynote Dr. Elena Rostova', completed: true },
+        { id: 'cd-14', title: 'Draft itemized catering and AV equipment contract', completed: false },
+        { id: 'cd-15', title: 'Submit IEEE CIS student chapter activity report to IEEE Region', completed: false }
+      ]
+    },
+    {
+      id: 'club-ieeecis-3',
+      title: 'IEEE CIS Annual Membership Drive & Merchandise Budget Defense',
+      clubName: 'IEEE CIS',
+      category: 'Finance & Budget',
+      role: 'Treasurer',
+      priority: 'Medium',
+      status: 'Todo',
+      dueDate: new Date(Date.now() + 86400000 * 12).toISOString().split('T')[0],
+      assignee: 'Finance Committee',
+      budget: '$800 allocation',
+      location: 'Student Union Financial Office',
+      notes: 'Reconcile member enrollment receipts, order custom IEEE CIS circuit-board stickers, and request travel funding for IEEE WCCI conference.',
+      deliverables: [
+        { id: 'cd-16', title: 'Audit Q3 chapter ledger and expenditure receipts', completed: false },
+        { id: 'cd-17', title: 'Finalize custom badge and merchandise print proofs', completed: false }
+      ]
+    }
+  ],
+
   jobs: [
     {
       id: 'job-1',
@@ -493,6 +612,7 @@ Rule of Thumb: Speak aloud constantly. Start with a brute force O(N^2) solution 
   ],
 
   settings: {
+    userName: 'Varnzz',
     theme: 'light',
     sidebarCollapsed: false,
     autoArchiveDays: 7,
@@ -520,9 +640,14 @@ export function loadDatabase() {
       return j;
     });
 
+    const rawClub = Array.isArray(parsed.clubWork) ? parsed.clubWork : SAMPLE_DATA.clubWork;
+    const hasAssignedClubs = rawClub.some(c => c.clubName === 'GDGoC' || c.clubName === 'IEEE CIS');
+    const finalClubWork = hasAssignedClubs ? rawClub : SAMPLE_DATA.clubWork;
+
     return {
       tasks: Array.isArray(parsed.tasks) ? parsed.tasks : SAMPLE_DATA.tasks,
       codingChallenges: Array.isArray(parsed.codingChallenges) ? parsed.codingChallenges : SAMPLE_DATA.codingChallenges,
+      clubWork: finalClubWork,
       jobs: sanitizedJobs,
       notes: Array.isArray(parsed.notes) ? parsed.notes : SAMPLE_DATA.notes,
       activityLog: Array.isArray(parsed.activityLog) ? parsed.activityLog : SAMPLE_DATA.activityLog,
@@ -594,6 +719,7 @@ export function parseImportedJSON(jsonString) {
     return {
       tasks: parsed.tasks,
       codingChallenges: Array.isArray(parsed.codingChallenges) ? parsed.codingChallenges : SAMPLE_DATA.codingChallenges,
+      clubWork: Array.isArray(parsed.clubWork) ? parsed.clubWork : SAMPLE_DATA.clubWork,
       jobs: parsed.jobs,
       notes: Array.isArray(parsed.notes) ? parsed.notes : [],
       activityLog: Array.isArray(parsed.activityLog) ? parsed.activityLog : [],
