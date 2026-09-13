@@ -194,7 +194,7 @@ export const SAMPLE_DATA = {
       stage: 'interview',
       dateApplied: new Date(Date.now() - 86400000 * 18).toISOString().split('T')[0],
       deadline: new Date(Date.now() + 86400000 * 5).toISOString().split('T')[0],
-      interviewDate: new Date(Date.now() + 86400000 * 2).toISOString().replace(/:[0-9]{2}\.[0-9]{3}Z$/, '').replace('T', 'T14:30'),
+      interviewDate: new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0] + 'T14:30',
       location: 'Mountain View, CA (Hybrid)',
       salary: '$58 / hr + Housing Stipend',
       jobUrl: 'https://careers.google.com/jobs/results/',
@@ -308,7 +308,7 @@ Go, C++, Spanner, Protobuf, Kubernetes.`,
       stage: 'interview',
       dateApplied: new Date(Date.now() - 86400000 * 14).toISOString().split('T')[0],
       deadline: null,
-      interviewDate: new Date(Date.now() + 86400000 * 4).toISOString().replace(/:[0-9]{2}\.[0-9]{3}Z$/, '').replace('T', 'T16:00'),
+      interviewDate: new Date(Date.now() + 86400000 * 4).toISOString().split('T')[0] + 'T16:00',
       location: 'Remote (Worldwide)',
       salary: '$55 / hr + Tech Stipend',
       jobUrl: 'https://linear.app/careers',
@@ -511,10 +511,19 @@ export function loadDatabase() {
       return SAMPLE_DATA;
     }
     const parsed = JSON.parse(raw);
+    const rawJobs = Array.isArray(parsed.jobs) ? parsed.jobs : SAMPLE_DATA.jobs;
+    const sanitizedJobs = rawJobs.map(j => {
+      if (j.interviewDate && typeof j.interviewDate === 'string') {
+        const cleaned = j.interviewDate.replace(/T(\d{2}:\d{2}).*/, 'T$1');
+        return { ...j, interviewDate: cleaned };
+      }
+      return j;
+    });
+
     return {
       tasks: Array.isArray(parsed.tasks) ? parsed.tasks : SAMPLE_DATA.tasks,
       codingChallenges: Array.isArray(parsed.codingChallenges) ? parsed.codingChallenges : SAMPLE_DATA.codingChallenges,
-      jobs: Array.isArray(parsed.jobs) ? parsed.jobs : SAMPLE_DATA.jobs,
+      jobs: sanitizedJobs,
       notes: Array.isArray(parsed.notes) ? parsed.notes : SAMPLE_DATA.notes,
       activityLog: Array.isArray(parsed.activityLog) ? parsed.activityLog : SAMPLE_DATA.activityLog,
       settings: { ...SAMPLE_DATA.settings, ...(parsed.settings || {}) }
@@ -563,7 +572,7 @@ export function exportDatabaseJSON(data) {
   const anchor = document.createElement('a');
   const dateStr = new Date().toISOString().split('T')[0];
   anchor.href = url;
-  anchor.download = `aura-career-backup-${dateStr}.json`;
+  anchor.download = `todo-backup-${dateStr}.json`;
   document.body.appendChild(anchor);
   anchor.click();
   document.body.removeChild(anchor);

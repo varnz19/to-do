@@ -274,10 +274,11 @@ export default function TasksPage() {
               </span>
             ))}
 
-            {/* Hover Actions */}
-            <div className="opacity-0 group-hover:opacity-100 flex items-center gap-0.5 transition-opacity">
+            {/* Actions */}
+            <div className="opacity-80 md:opacity-0 md:group-hover:opacity-100 flex items-center gap-0.5 transition-opacity">
               {!isSubtask ? (
                 <button
+                  type="button"
                   onClick={() => indentTask(task.id)}
                   className="p-1 rounded text-notion-muted hover:text-notion-text hover:bg-notion-hover"
                   title="Make Subtask (Indent)"
@@ -286,6 +287,7 @@ export default function TasksPage() {
                 </button>
               ) : (
                 <button
+                  type="button"
                   onClick={() => outdentTask(task.id)}
                   className="p-1 rounded text-notion-muted hover:text-notion-text hover:bg-notion-hover"
                   title="Promote to Top-level (Outdent)"
@@ -295,6 +297,7 @@ export default function TasksPage() {
               )}
 
               <button
+                type="button"
                 onClick={() => moveTask(task, 'up')}
                 className="p-1 rounded text-notion-muted hover:text-notion-text hover:bg-notion-hover"
                 title="Move up"
@@ -303,6 +306,7 @@ export default function TasksPage() {
               </button>
 
               <button
+                type="button"
                 onClick={() => moveTask(task, 'down')}
                 className="p-1 rounded text-notion-muted hover:text-notion-text hover:bg-notion-hover"
                 title="Move down"
@@ -311,9 +315,14 @@ export default function TasksPage() {
               </button>
 
               <button
-                onClick={() => deleteTask(task.id)}
-                className="p-1 rounded text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteTask(task.id);
+                }}
+                className="p-1 rounded text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer"
                 title="Delete task"
+                aria-label={`Delete ${task.title}`}
               >
                 <Trash2 size={13} />
               </button>
@@ -338,7 +347,7 @@ export default function TasksPage() {
           <h1 className="text-3xl font-display font-semibold text-notion-text tracking-tight">
             Tasks & Action Items
           </h1>
-          <p className="text-xs text-notion-muted italic">
+          <p className="text-xs text-notion-muted">
             Hierarchical task outlines, inline quick editing, and checklist templates.
           </p>
         </div>
@@ -418,7 +427,7 @@ export default function TasksPage() {
           {archivedTasks.length > 0 && (
             <button
               onClick={() => setShowArchived(prev => !prev)}
-              className="flex items-center gap-1 text-xs text-notion-muted hover:text-notion-text px-2 py-1 rounded hover:bg-notion-hover transition-colors font-medium italic"
+              className="flex items-center gap-1 text-xs text-notion-muted hover:text-notion-text px-2 py-1 rounded hover:bg-notion-hover transition-colors font-medium"
             >
               <Archive size={13} />
               <span>{showArchived ? 'Hide Completed >7d' : `Archived (${archivedTasks.length})`}</span>
@@ -451,7 +460,7 @@ export default function TasksPage() {
         {rootTasks.length === 0 ? (
           <div className="py-16 text-center space-y-2">
             <p className="font-display font-semibold text-sm text-notion-text">No tasks found</p>
-            <p className="text-xs text-notion-muted italic max-w-sm mx-auto">
+            <p className="text-xs text-notion-muted max-w-sm mx-auto">
               {searchQuery || selectedTag || filterScope !== 'all'
                 ? 'Try adjusting your filters or search query.'
                 : 'Your task list is clear. Use the quick-add input above to create a task.'}

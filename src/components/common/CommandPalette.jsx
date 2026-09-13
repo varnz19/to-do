@@ -207,7 +207,7 @@ export default function CommandPalette() {
 
         <div className="overflow-y-auto p-2 flex flex-col gap-1 divide-y divide-notion-border/40">
           {allResults.length === 0 ? (
-            <div className="py-8 text-center text-xs text-notion-muted italic">
+            <div className="py-8 text-center text-xs text-notion-muted">
               No results found for "{query}".
             </div>
           ) : (

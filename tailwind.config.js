@@ -9,15 +9,15 @@ export default {
     extend: {
       colors: {
         terracotta: {
-          DEFAULT: '#C86D51',
-          light: '#E58A6F',
-          dark: '#A6533A',
-          muted: '#F6ECE8',
+          DEFAULT: '#4F46E5', // Vibrant Electric Indigo
+          light: '#6366F1',
+          dark: '#4338CA',
+          muted: '#EEF2FF',
         },
         forest: {
-          DEFAULT: '#2E4D40',
-          light: '#436B5A',
-          dark: '#1D332A',
+          DEFAULT: '#10B981', // Vibrant Emerald
+          light: '#34D399',
+          dark: '#059669',
         },
         notion: {
           bg: 'var(--bg-main)',
@@ -29,7 +29,7 @@ export default {
           text: 'var(--text-main)',
           muted: 'var(--text-muted)',
           accent: 'var(--accent-color)',
-          // Cohesive Warm Status Palette
+          // Cohesive Vibrant Status Palette
           wishlist: { bg: 'var(--st-wishlist-bg)', text: 'var(--st-wishlist-text)', border: 'var(--st-wishlist-border)' },
           applied: { bg: 'var(--st-applied-bg)', text: 'var(--st-applied-text)', border: 'var(--st-applied-border)' },
           oa: { bg: 'var(--st-oa-bg)', text: 'var(--st-oa-text)', border: 'var(--st-oa-border)' },
@@ -39,15 +39,15 @@ export default {
         }
       },
       fontFamily: {
-        display: ['Fraunces', 'Georgia', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {
-        'warm-sm': '0 1px 3px rgba(36, 33, 29, 0.05), 0 1px 2px rgba(36, 33, 29, 0.03)',
-        'warm-card': '0 4px 14px -2px rgba(36, 33, 29, 0.06), 0 1px 3px rgba(36, 33, 29, 0.04)',
-        'warm-hover': '0 8px 22px -4px rgba(36, 33, 29, 0.10), 0 2px 6px rgba(36, 33, 29, 0.04)',
-        'warm-modal': '0 20px 40px -8px rgba(24, 22, 20, 0.25), 0 4px 12px rgba(24, 22, 20, 0.1)',
+        'warm-sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        'warm-card': '0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px -1px rgba(0, 0, 0, 0.06)',
+        'warm-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04)',
+        'warm-modal': '0 20px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.06)',
       },
       animation: {
         'strike': 'strike 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards',

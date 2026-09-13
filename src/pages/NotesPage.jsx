@@ -58,12 +58,10 @@ export default function NotesPage() {
   };
 
   const handleDeleteNote = (id) => {
-    if (window.confirm('Are you sure you want to delete this note?')) {
-      deleteNote(id);
-      if (selectedNoteId === id) {
-        const remaining = notes.filter(n => n.id !== id);
-        setSelectedNoteId(remaining[0]?.id || null);
-      }
+    deleteNote(id);
+    if (selectedNoteId === id) {
+      const remaining = notes.filter(n => n.id !== id);
+      setSelectedNoteId(remaining[0]?.id || null);
     }
   };
 
@@ -130,7 +128,7 @@ export default function NotesPage() {
 
         <div className="flex-1 overflow-y-auto p-2 space-y-1">
           {filteredNotes.length === 0 ? (
-            <div className="py-8 text-center text-xs text-notion-muted italic">
+            <div className="py-8 text-center text-xs text-notion-muted">
               No notes found.
             </div>
           ) : (
@@ -156,7 +154,7 @@ export default function NotesPage() {
                   {linkedJob && (
                     <div className="text-[10px] text-terracotta font-medium flex items-center gap-1">
                       <Briefcase size={10} />
-                      <span className="truncate italic">Linked: {linkedJob.company}</span>
+                      <span className="truncate">Linked: {linkedJob.company}</span>
                     </div>
                   )}
 
@@ -270,7 +268,7 @@ export default function NotesPage() {
           </div>
         ) : (
           <div className="flex-1 flex flex-col items-center justify-center text-notion-muted text-xs space-y-2">
-            <p className="italic">Select a document from the left or create a new one.</p>
+            <p>Select a document from the left or create a new one.</p>
             <button
               onClick={handleCreateNote}
               className="text-terracotta font-semibold hover:underline text-xs"

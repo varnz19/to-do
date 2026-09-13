@@ -44,6 +44,12 @@ export function AppProvider({ children }) {
     }
   }, [theme]);
 
+  // Handle Font Family sync
+  const fontFamily = data.settings?.fontFamily || 'inter';
+  useEffect(() => {
+    document.documentElement.setAttribute('data-font', fontFamily);
+  }, [fontFamily]);
+
   // Toast notification helper (NO emojis)
   const addToast = useCallback((message, type = 'info') => {
     const id = Date.now().toString() + Math.random().toString().slice(2, 6);
@@ -559,6 +565,13 @@ export function AppProvider({ children }) {
     }));
   }, []);
 
+  const setFontFamily = useCallback((newFont) => {
+    setData(prev => ({
+      ...prev,
+      settings: { ...prev.settings, fontFamily: newFont }
+    }));
+  }, []);
+
   const exportData = useCallback(() => {
     exportDatabaseJSON(data);
     addToast('Backup exported successfully', 'success');
@@ -745,6 +758,8 @@ export function AppProvider({ children }) {
     executeQuickAdd,
     // Settings & Backup
     setTheme,
+    fontFamily,
+    setFontFamily,
     exportData,
     importData,
     resetToSampleData,

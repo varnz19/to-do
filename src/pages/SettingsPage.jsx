@@ -20,6 +20,8 @@ export default function SettingsPage() {
   const {
     theme,
     setTheme,
+    fontFamily = 'inter',
+    setFontFamily,
     exportData,
     importData,
     resetToSampleData,
@@ -64,22 +66,59 @@ export default function SettingsPage() {
         <h1 className="text-3xl font-display font-semibold text-notion-text tracking-tight">
           Settings & Local Data Studio
         </h1>
-        <p className="text-xs text-notion-muted italic">
-          Configure visual palettes, manage portable JSON backups, and review keyboard shortcuts.
+        <p className="text-xs text-notion-muted">
+          Configure visual appearance, typography, portable JSON backups, and keyboard shortcuts.
         </p>
+      </div>
+
+      {/* Typography & Font Family Section */}
+      <div className="bg-notion-card border border-notion-border rounded-xl p-5 shadow-warm-sm space-y-4">
+        <div>
+          <h2 className="text-sm font-semibold text-notion-text">Workspace Typography & Font</h2>
+          <p className="text-xs text-notion-muted">Select your preferred uniform font family across all headings and body text.</p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {[
+            { id: 'inter', label: 'Inter', tag: 'Recommended', desc: 'Ultra-crisp, neutral modern UI sans' },
+            { id: 'system', label: 'System UI', tag: 'Native', desc: 'Apple SF Pro / Segoe UI native feel' },
+            { id: 'jakarta', label: 'Plus Jakarta', tag: 'Geometric', desc: 'Modern geometric sans' },
+            { id: 'mono', label: 'JetBrains Mono', tag: 'Monospace', desc: 'Technical developer aesthetic' },
+          ].map(opt => {
+            const isSelected = fontFamily === opt.id;
+            return (
+              <button
+                key={opt.id}
+                onClick={() => setFontFamily(opt.id)}
+                className={`p-3 rounded-lg border text-left flex flex-col gap-1.5 transition-all ${
+                  isSelected
+                    ? 'border-terracotta bg-terracotta/5 ring-1 ring-terracotta shadow-warm-sm'
+                    : 'border-notion-border hover:bg-notion-hover'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-notion-text">{opt.label}</span>
+                  {isSelected && <CheckCircle2 size={13} className="text-terracotta" />}
+                </div>
+                <span className="text-[10px] uppercase font-mono tracking-wider text-terracotta">{opt.tag}</span>
+                <span className="text-[10px] text-notion-muted leading-tight">{opt.desc}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Theme Settings Section */}
       <div className="bg-notion-card border border-notion-border rounded-xl p-5 shadow-warm-sm space-y-4">
         <div>
           <h2 className="text-sm font-semibold text-notion-text">Appearance & Workspace Theme</h2>
-          <p className="text-xs text-notion-muted italic">A calibrated warm palette designed for long focus sessions.</p>
+          <p className="text-xs text-notion-muted">A crisp, modern palette with vibrant accents and pure white canvas.</p>
         </div>
 
         <div className="grid grid-cols-3 gap-3 max-w-lg">
           {[
-            { id: 'light', label: 'Luminous Cream', icon: Sun, desc: 'Warm off-white base with terracotta' },
-            { id: 'dark', label: 'Warm Espresso', icon: Moon, desc: 'Calm charcoal & warm ivory text' },
+            { id: 'light', label: 'Clean White', icon: Sun, desc: 'Pure white canvas with vibrant accents' },
+            { id: 'dark', label: 'Midnight Slate', icon: Moon, desc: 'Deep midnight canvas with vibrant glow' },
             { id: 'system', label: 'System Adaptive', icon: Laptop, desc: 'Follows operating system' },
           ].map(opt => {
             const Icon = opt.icon;
@@ -99,7 +138,7 @@ export default function SettingsPage() {
                   {isSelected && <CheckCircle2 size={13} className="text-terracotta" />}
                 </div>
                 <span className="text-xs font-semibold text-notion-text">{opt.label}</span>
-                <span className="text-[10px] text-notion-muted italic">{opt.desc}</span>
+                <span className="text-[10px] text-notion-muted">{opt.desc}</span>
               </button>
             );
           })}
@@ -110,7 +149,7 @@ export default function SettingsPage() {
       <div className="bg-notion-card border border-notion-border rounded-xl p-5 shadow-warm-sm space-y-5">
         <div>
           <h2 className="text-sm font-semibold text-notion-text">Data Persistence & Backups</h2>
-          <p className="text-xs text-notion-muted italic">
+          <p className="text-xs text-notion-muted">
             State persists automatically in browser LocalStorage. Export regular backups to portable JSON.
           </p>
         </div>
@@ -196,7 +235,7 @@ export default function SettingsPage() {
         <div className="divide-y divide-notion-border/60">
           {SHORTCUTS.map(sc => (
             <div key={sc.key} className="py-2.5 flex items-center justify-between text-xs">
-              <span className="text-notion-muted italic">{sc.description}</span>
+              <span className="text-notion-muted">{sc.description}</span>
               <kbd className="px-2 py-0.5 rounded bg-notion-bg border border-notion-border text-notion-text font-mono font-medium shadow-warm-sm">
                 {sc.key}
               </kbd>

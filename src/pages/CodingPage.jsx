@@ -106,7 +106,7 @@ export default function CodingPage() {
           <h1 className="text-3xl font-display font-semibold text-notion-text tracking-tight">
             Coding & Problem Tracker
           </h1>
-          <p className="text-xs text-notion-muted italic">
+          <p className="text-xs text-notion-muted">
             Dedicated workspace for Data Structures, Algorithms, System Design blueprints, and take-home sprints.
           </p>
         </div>
@@ -125,25 +125,25 @@ export default function CodingPage() {
         <div className="bg-notion-card border border-notion-border rounded-xl p-4 shadow-warm-sm space-y-1">
           <span className="text-[11px] font-bold uppercase tracking-wider text-notion-muted">Total Practice Items</span>
           <div className="text-2xl font-display font-bold text-notion-text">{stats.total}</div>
-          <span className="text-[11px] text-notion-muted italic">Curated technical problems</span>
+          <span className="text-[11px] text-notion-muted">Curated technical problems</span>
         </div>
 
         <div className="bg-notion-card border border-notion-border rounded-xl p-4 shadow-warm-sm space-y-1">
           <span className="text-[11px] font-bold uppercase tracking-wider text-forest">Solved & Mastered</span>
           <div className="text-2xl font-display font-bold text-forest">{stats.solved}</div>
-          <span className="text-[11px] text-notion-muted italic">{stats.rate}% completion rate</span>
+          <span className="text-[11px] text-notion-muted">{stats.rate}% completion rate</span>
         </div>
 
         <div className="bg-notion-card border border-notion-border rounded-xl p-4 shadow-warm-sm space-y-1">
           <span className="text-[11px] font-bold uppercase tracking-wider text-[#8A5B18] dark:text-[#E5B564]">In Progress</span>
           <div className="text-2xl font-display font-bold text-[#8A5B18] dark:text-[#E5B564]">{stats.inProgress}</div>
-          <span className="text-[11px] text-notion-muted italic">Actively drilling</span>
+          <span className="text-[11px] text-notion-muted">Actively drilling</span>
         </div>
 
         <div className="bg-notion-card border border-notion-border rounded-xl p-4 shadow-warm-sm space-y-1">
           <span className="text-[11px] font-bold uppercase tracking-wider text-terracotta">Review Needed</span>
           <div className="text-2xl font-display font-bold text-terracotta">{stats.reviewNeeded}</div>
-          <span className="text-[11px] text-notion-muted italic">Reinforce before interviews</span>
+          <span className="text-[11px] text-notion-muted">Reinforce before interviews</span>
         </div>
       </div>
 
@@ -210,26 +210,26 @@ export default function CodingPage() {
         {filteredChallenges.length === 0 ? (
           <div className="py-16 text-center space-y-2">
             <p className="font-display text-base font-semibold text-notion-text">No technical problems found</p>
-            <p className="text-xs text-notion-muted italic max-w-sm mx-auto">
+            <p className="text-xs text-notion-muted max-w-sm mx-auto">
               Adjust your search filters or click "New Problem" to add algorithms, mock interview questions, or take-home tasks.
             </p>
           </div>
         ) : (
           filteredChallenges.map(item => {
-            let diffClass = 'bg-[#EEF5F1] text-[#285B40] dark:bg-[#162B1F] dark:text-[#76B992] border-[#BFDAC9] dark:border-[#264A35]';
+            let diffClass = 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800';
             if (item.difficulty === 'Medium') {
-              diffClass = 'bg-[#F9F3E8] text-[#8A5B18] dark:bg-[#2B2214] dark:text-[#E5B564] border-[#E8D7B8] dark:border-[#4A3A22]';
+              diffClass = 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border-amber-200 dark:border-amber-800';
             } else if (item.difficulty === 'Hard') {
-              diffClass = 'bg-[#FBF0EB] text-[#A8492C] dark:bg-[#331A14] dark:text-[#E78C72] border-[#EBCABE] dark:border-[#522920]';
+              diffClass = 'bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-400 border-rose-200 dark:border-rose-800';
             }
 
             let statusClass = 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300';
             if (item.status === 'Solved') {
-              statusClass = 'bg-forest/15 text-forest dark:text-forest-light font-bold';
+              statusClass = 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300 font-semibold border border-emerald-200 dark:border-emerald-800';
             } else if (item.status === 'In Progress') {
-              statusClass = 'bg-[#F9F3E8] text-[#8A5B18] dark:bg-[#2B2214] dark:text-[#E5B564] font-bold';
+              statusClass = 'bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300 font-semibold border border-amber-200 dark:border-amber-800';
             } else if (item.status === 'Review Needed') {
-              statusClass = 'bg-terracotta/15 text-terracotta font-bold';
+              statusClass = 'bg-indigo-50 text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300 font-semibold border border-indigo-200 dark:border-indigo-800';
             }
 
             return (
@@ -271,22 +271,23 @@ export default function CodingPage() {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-3 text-notion-muted text-[11px]">
-                    <span className="font-semibold text-notion-text/90">Pattern: <span className="font-normal italic">{item.pattern}</span></span>
+                    <span className="font-semibold text-notion-text/90">Pattern: <span className="font-normal">{item.pattern}</span></span>
                     {item.lastPracticed && (
                       <span className="font-mono">Last reviewed: {item.lastPracticed}</span>
                     )}
                   </div>
 
                   {item.notes && (
-                    <p className="text-[11px] text-notion-muted/90 italic bg-notion-bg/60 p-2 rounded-lg border border-notion-border/60">
+                    <p className="text-[11px] text-notion-muted/90 bg-notion-bg/60 p-2 rounded-lg border border-notion-border/60">
                       {item.notes}
                     </p>
                   )}
                 </div>
 
                 {/* Right Status Actions */}
-                <div className="flex items-center gap-3 shrink-0">
+                <div className="flex items-center gap-2 shrink-0">
                   <button
+                    type="button"
                     onClick={() => toggleCodingStatus(item.id)}
                     className={`px-3 py-1.5 rounded-lg text-xs transition-all border border-transparent hover:border-notion-border ${statusClass}`}
                     title="Click to cycle status"
@@ -295,11 +296,17 @@ export default function CodingPage() {
                   </button>
 
                   <button
-                    onClick={() => deleteCodingChallenge(item.id)}
-                    className="p-1.5 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-lg transition-colors"
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      deleteCodingChallenge(item.id);
+                    }}
+                    className="p-2 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-lg transition-colors cursor-pointer border border-transparent hover:border-rose-200 dark:hover:border-rose-800"
                     title="Delete item"
+                    aria-label={`Delete ${item.title}`}
                   >
-                    <Trash2 size={14} />
+                    <Trash2 size={15} />
                   </button>
                 </div>
               </div>

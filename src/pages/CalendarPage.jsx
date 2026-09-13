@@ -119,7 +119,7 @@ export default function CalendarPage() {
           <h1 className="text-3xl font-display font-semibold text-notion-text tracking-tight">
             Unified Calendar & Milestones
           </h1>
-          <p className="text-xs text-notion-muted italic">
+          <p className="text-xs text-notion-muted">
             Synchronized schedule of task commitments, interviews, and application deadlines.
           </p>
         </div>
@@ -239,11 +239,11 @@ export default function CalendarPage() {
 
                   <div className="space-y-1 mt-1 overflow-hidden">
                     {dayEvents.slice(0, 2).map((ev) => {
-                      let tagBg = 'bg-[#EDF3F7] text-[#235479] dark:bg-[#162635] dark:text-[#8EB9DD] border-[#BED2E2] dark:border-[#243D53]';
+                      let tagBg = 'bg-sky-50 text-sky-700 dark:bg-sky-950/50 dark:text-sky-300 border-sky-200 dark:border-sky-800';
                       if (ev.type === 'interview') {
-                        tagBg = 'bg-[#F5EEF6] text-[#6A3E6F] dark:bg-[#2B1B2D] dark:text-[#CB97D2] border-[#DECEE0] dark:border-[#4B2E4F]';
+                        tagBg = 'bg-purple-50 text-purple-700 dark:bg-purple-950/50 dark:text-purple-300 border-purple-200 dark:border-purple-800';
                       } else if (ev.type === 'deadline') {
-                        tagBg = 'bg-[#F9F3E8] text-[#8A5B18] dark:bg-[#2B2214] dark:text-[#E5B564] border-[#E8D7B8] dark:border-[#4A3A22]';
+                        tagBg = 'bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300 border-amber-200 dark:border-amber-800';
                       }
 
                       return (
@@ -257,7 +257,7 @@ export default function CalendarPage() {
                       );
                     })}
                     {dayEvents.length > 2 && (
-                      <div className="text-[9px] text-notion-muted font-bold pl-1 italic">
+                      <div className="text-[9px] text-notion-muted font-bold pl-1">
                         +{dayEvents.length - 2} more
                       </div>
                     )}
@@ -281,7 +281,7 @@ export default function CalendarPage() {
 
           {selectedDayEvents.length === 0 ? (
             <div className="py-12 text-center text-xs text-notion-muted space-y-2">
-              <p className="italic">Nothing scheduled for this date.</p>
+              <p>Nothing scheduled for this date.</p>
               <button
                 onClick={() => {
                   addTask({
@@ -295,23 +295,31 @@ export default function CalendarPage() {
               </button>
             </div>
           ) : (
-            <div className="space-y-2.5 max-h-[480px] overflow-y-auto pr-1">
+            <div className="space-y-2.5 max-h-[420px] overflow-y-auto pr-1">
               {selectedDayEvents.map(ev => {
+                let badgeStyle = 'bg-sky-50 text-sky-700 dark:bg-sky-950/50 dark:text-sky-300 border border-sky-200 dark:border-sky-800';
+                if (ev.type === 'interview') {
+                  badgeStyle = 'bg-purple-50 text-purple-700 dark:bg-purple-950/50 dark:text-purple-300 border border-purple-200 dark:border-purple-800';
+                }
+
                 return (
                   <div
                     key={ev.id}
                     onClick={() => {
-                      if (ev.jobId) navigate(`/jobs/${ev.jobId}`);
-                      else navigate('/tasks');
+                      if (ev.type === 'task') {
+                        navigate('/tasks');
+                      } else {
+                        navigate(`/jobs/${ev.jobId || ''}`);
+                      }
                     }}
                     className="p-3 rounded-lg border border-notion-border hover:border-terracotta/60 hover:bg-notion-hover/40 transition-all cursor-pointer space-y-1 group"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-mono uppercase px-1.5 py-0.2 rounded font-bold tracking-wider bg-notion-hover text-notion-muted">
+                      <span className={`text-[10px] px-2 py-0.2 rounded font-mono uppercase font-semibold ${badgeStyle}`}>
                         {ev.type}
                       </span>
                       {ev.time && (
-                        <span className="text-xs text-notion-muted font-mono flex items-center gap-1">
+                        <span className="text-[11px] text-terracotta font-mono flex items-center gap-1">
                           <Clock size={11} />
                           {ev.time}
                         </span>
@@ -323,7 +331,7 @@ export default function CalendarPage() {
                     </div>
 
                     {ev.subtitle && (
-                      <div className="text-xs text-notion-muted truncate italic">
+                      <div className="text-xs text-notion-muted truncate">
                         {ev.subtitle}
                       </div>
                     )}

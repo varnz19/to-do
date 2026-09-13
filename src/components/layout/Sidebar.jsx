@@ -60,19 +60,19 @@ export default function Sidebar({ collapsed, setCollapsed }) {
       <div className="flex items-center justify-between p-4 border-b border-notion-border/80">
         {!collapsed ? (
           <div className="flex items-center gap-3 overflow-hidden">
-            <div className="w-8 h-8 rounded-lg bg-terracotta text-white flex items-center justify-center font-display font-bold text-sm shadow-warm-sm shrink-0">
-              A
+            <div className="w-8 h-8 rounded-lg bg-terracotta text-white flex items-center justify-center font-bold text-sm shadow-warm-sm shrink-0">
+              <CheckSquare size={16} strokeWidth={2.5} />
             </div>
             <div className="flex flex-col min-w-0">
-              <span className="font-display font-semibold text-sm text-notion-text tracking-tight truncate">
-                Aura Workspace
+              <span className="font-bold text-sm text-notion-text tracking-tight truncate">
+                TO-DO
               </span>
-              <span className="text-[11px] text-notion-muted italic truncate">Career & Task Studio</span>
+              <span className="text-[11px] text-notion-muted truncate">Workspace & Tracker</span>
             </div>
           </div>
         ) : (
-          <div className="w-8 h-8 mx-auto rounded-lg bg-terracotta text-white flex items-center justify-center font-display font-bold text-sm shadow-warm-sm">
-            A
+          <div className="w-8 h-8 mx-auto rounded-lg bg-terracotta text-white flex items-center justify-center font-bold text-sm shadow-warm-sm">
+            <CheckSquare size={16} strokeWidth={2.5} />
           </div>
         )}
 
@@ -168,7 +168,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
                   saveStatus === 'saved' ? 'bg-forest' : 'bg-[#C86D51] animate-pulse'
                 }`}
               />
-              <span className="italic">{saveStatus === 'saved' ? 'Saved locally' : 'Syncing...'}</span>
+              <span>{saveStatus === 'saved' ? 'Saved locally' : 'Syncing...'}</span>
             </div>
             <ShieldCheck size={13} className="text-notion-muted" />
           </div>
@@ -189,8 +189,8 @@ export default function Sidebar({ collapsed, setCollapsed }) {
           }`}
           title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
         >
-          {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
-          {!collapsed && <span>{theme === 'dark' ? 'Light palette' : 'Warm dark palette'}</span>}
+          {theme === 'dark' ? <Sun size={15} className="text-amber-500" /> : <Moon size={15} className="text-indigo-500" />}
+          {!collapsed && <span>{theme === 'dark' ? 'Light mode' : 'Dark mode'}</span>}
         </button>
       </div>
     </aside>

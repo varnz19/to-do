@@ -3,95 +3,103 @@
 @tailwind utilities;
 
 :root {
-  /* Warm Editorial Light Palette (Warm off-white / Terracotta) */
-  --bg-main: #FAF7F2;
-  --bg-sidebar: #F3EEE7;
+  /* Modern Crisp Clean White & Vibrant Color Palette */
+  --bg-main: #FFFFFF;
+  --bg-sidebar: #F8FAFC;
   --bg-card: #FFFFFF;
-  --bg-hover: #EBE5DC;
-  --bg-active: #E2DBD2;
-  --border-color: #E2DBD1;
-  --text-main: #24211D;
-  --text-muted: #736C63;
-  --accent-color: #C86D51;
+  --bg-hover: #F1F5F9;
+  --bg-active: #E2E8F0;
+  --border-color: #E2E8F0;
+  --text-main: #0F172A;
+  --text-muted: #64748B;
+  --accent-color: #4F46E5;
 
-  /* Custom Cohesive Status Stages - Light */
-  --st-wishlist-bg: #F9F3E8;
-  --st-wishlist-text: #8A5B18;
-  --st-wishlist-border: #E8D7B8;
+  /* Custom Vibrant Status Stages - Light */
+  --st-wishlist-bg: #FEF3C7;
+  --st-wishlist-text: #B45309;
+  --st-wishlist-border: #FDE68A;
 
-  --st-applied-bg: #EDF3F7;
-  --st-applied-text: #235479;
-  --st-applied-border: #BED2E2;
+  --st-applied-bg: #E0F2FE;
+  --st-applied-text: #0369A1;
+  --st-applied-border: #BAE6FD;
 
-  --st-oa-bg: #FBF0EB;
-  --st-oa-text: #A8492C;
-  --st-oa-border: #EBCABE;
+  --st-oa-bg: #FFEDD5;
+  --st-oa-text: #C2410C;
+  --st-oa-border: #FED7AA;
 
-  --st-interview-bg: #F5EEF6;
-  --st-interview-text: #6A3E6F;
-  --st-interview-border: #DECEE0;
+  --st-interview-bg: #EDE9FE;
+  --st-interview-text: #6D28D9;
+  --st-interview-border: #DDD6FE;
 
-  --st-offer-bg: #EEF5F1;
-  --st-offer-text: #285B40;
-  --st-offer-border: #BFDAC9;
+  --st-offer-bg: #D1FAE5;
+  --st-offer-text: #047857;
+  --st-offer-border: #A7F3D0;
 
-  --st-rejected-bg: #EFECE8;
-  --st-rejected-text: #615C54;
-  --st-rejected-border: #D5CFC7;
+  --st-rejected-bg: #F1F5F9;
+  --st-rejected-text: #475569;
+  --st-rejected-border: #CBD5E1;
 }
 
 .dark {
-  /* Warm Editorial Dark Palette (Warm Charcoal / Espresso) */
-  --bg-main: #181614;
-  --bg-sidebar: #1E1B18;
-  --bg-card: #23201C;
-  --bg-hover: #2D2924;
-  --bg-active: #37322D;
-  --border-color: #37332D;
-  --text-main: #ECE7DE;
-  --text-muted: #9E968B;
-  --accent-color: #DB7D61;
+  /* Modern Midnight Slate Dark Palette */
+  --bg-main: #090D16;
+  --bg-sidebar: #0E1320;
+  --bg-card: #131A2B;
+  --bg-hover: #1E283D;
+  --bg-active: #283550;
+  --border-color: #1F2A3F;
+  --text-main: #F8FAFC;
+  --text-muted: #94A3B8;
+  --accent-color: #6366F1;
 
-  /* Custom Cohesive Status Stages - Dark */
-  --st-wishlist-bg: #2B2214;
-  --st-wishlist-text: #E5B564;
-  --st-wishlist-border: #4A3A22;
+  /* Custom Vibrant Status Stages - Dark */
+  --st-wishlist-bg: #2D2008;
+  --st-wishlist-text: #FBBF24;
+  --st-wishlist-border: #4D380E;
 
-  --st-applied-bg: #162635;
-  --st-applied-text: #8EB9DD;
-  --st-applied-border: #243D53;
+  --st-applied-bg: #0C2840;
+  --st-applied-text: #38BDF8;
+  --st-applied-border: #144066;
 
-  --st-oa-bg: #331A14;
-  --st-oa-text: #E78C72;
-  --st-oa-border: #522920;
+  --st-oa-bg: #381A08;
+  --st-oa-text: #FB923C;
+  --st-oa-border: #5C2B0E;
 
-  --st-interview-bg: #2B1B2D;
-  --st-interview-text: #CB97D2;
-  --st-interview-border: #4B2E4F;
+  --st-interview-bg: #261740;
+  --st-interview-text: #A78BFA;
+  --st-interview-border: #442B73;
 
-  --st-offer-bg: #162B1F;
-  --st-offer-text: #76B992;
-  --st-offer-border: #264A35;
+  --st-offer-bg: #092C1D;
+  --st-offer-text: #34D399;
+  --st-offer-border: #134E35;
 
-  --st-rejected-bg: #262320;
-  --st-rejected-text: #A59E95;
-  --st-rejected-border: #3E3A35;
+  --st-rejected-bg: #1B2230;
+  --st-rejected-text: #94A3B8;
+  --st-rejected-border: #2C364B;
 }
 
 body {
   margin: 0;
-  font-family: '"Plus Jakarta Sans"', system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--text-main);
   background-color: var(--bg-main);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  /* Subtle warm paper grain feel */
-  background-image: radial-gradient(rgba(36, 33, 29, 0.03) 1px, transparent 0);
-  background-size: 24px 24px;
+}
+
+/* User-selectable uniform typography */
+html[data-font="system"], html[data-font="system"] body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+html[data-font="jakarta"], html[data-font="jakarta"] body {
+  font-family: '"Plus Jakarta Sans"', Inter, system-ui, sans-serif;
+}
+html[data-font="mono"], html[data-font="mono"] body {
+  font-family: '"JetBrains Mono"', monospace;
 }
 
 .dark body {
-  background-image: radial-gradient(rgba(236, 231, 222, 0.02) 1px, transparent 0);
+  background-color: var(--bg-main);
 }
 
 /* Custom Scrollbars */
@@ -107,7 +115,7 @@ body {
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(200, 109, 81, 0.5);
+  background: rgba(99, 102, 241, 0.5);
 }
 
 /* Strikethrough smooth effect */
@@ -148,7 +156,7 @@ body {
 .notion-checkbox:hover {
   opacity: 1;
   border-color: var(--accent-color);
-  background-color: rgba(200, 109, 81, 0.08);
+  background-color: rgba(79, 70, 229, 0.08);
 }
 .notion-checkbox:checked {
   background-color: var(--accent-color);
@@ -165,9 +173,9 @@ body {
   transform: rotate(45deg) translate(-0.5px, -1px);
 }
 
-/* Typography Uniformity */
-h1, h2, h3 {
-  font-family: 'Fraunces', Georgia, serif;
+/* Typography Uniformity - Headings inherit the exact active font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
   font-weight: 600;
   letter-spacing: -0.02em;
 }

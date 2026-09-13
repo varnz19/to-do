@@ -57,7 +57,7 @@ export default function JobDetailPage() {
     return (
       <div className="max-w-3xl mx-auto px-6 py-16 text-center space-y-4">
         <h2 className="font-display text-lg font-semibold text-notion-text">Application Not Found</h2>
-        <p className="text-xs text-notion-muted italic">The requested job application record does not exist or was removed.</p>
+        <p className="text-xs text-notion-muted">The requested job application record does not exist or was removed.</p>
         <Link
           to="/jobs"
           className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-terracotta text-white text-xs font-semibold shadow-warm-sm"
@@ -94,10 +94,8 @@ export default function JobDetailPage() {
   };
 
   const handleDelete = () => {
-    if (window.confirm(`Are you sure you want to delete ${job.company} (${job.role})?`)) {
-      deleteJob(job.id);
-      navigate('/jobs');
-    }
+    deleteJob(job.id);
+    navigate('/jobs');
   };
 
   const handleSaveNotes = () => {
@@ -137,7 +135,7 @@ export default function JobDetailPage() {
             </div>
             <div className="space-y-1 min-w-0">
               <h1 className="text-2xl font-display font-semibold text-notion-text leading-tight">{job.company}</h1>
-              <p className="text-xs text-notion-muted italic">{job.role}</p>
+              <p className="text-xs text-notion-muted">{job.role}</p>
             </div>
           </div>
 
@@ -182,7 +180,7 @@ export default function JobDetailPage() {
             <span className="text-notion-muted font-bold flex items-center gap-1.5 text-[11px] uppercase tracking-wider">
               <FileText size={12} className="text-terracotta" /> Attached Resume
             </span>
-            <div className="text-terracotta font-medium truncate italic" title={job.resumeVersion}>
+            <div className="text-terracotta font-medium truncate" title={job.resumeVersion}>
               {job.resumeVersion || 'Default'}
             </div>
           </div>
@@ -251,7 +249,7 @@ export default function JobDetailPage() {
             </form>
 
             {linkedTasks.length === 0 ? (
-              <div className="py-4 text-center text-xs text-notion-muted italic">
+              <div className="py-4 text-center text-xs text-notion-muted">
                 No tasks linked yet. Create follow-up tasks or interview prep reminders above.
               </div>
             ) : (
@@ -397,7 +395,7 @@ export default function JobDetailPage() {
                       {format(new Date(tl.timestamp), 'MMM d, yyyy')}
                     </span>
                   </div>
-                  <p className="text-notion-muted leading-relaxed italic text-[11px]">{tl.note}</p>
+                  <p className="text-notion-muted leading-relaxed text-[11px]">{tl.note}</p>
                 </div>
               ))}
             </div>
